@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+:root {
+  --main-color: #FEF836;
+  --acc-color: #00F0FF;
+}
+
+h1, h2 {
+  font-family: "Chakra Petch", sans-serif;
+  color: black;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.font-main {
+  font-family: "Chakra Petch", sans-serif;
+  font-style: normal;
+}
+
+.cp-btn--black {
+  border-image: url('./assets/cut-btn.svg') 0 20 fill;
+  color: black;
+}
+
+.cp-btn {
+  background-color: transparent;
+  font-family: "Chakra Petch", sans-serif;
+  align-items: center;
+  border-style: solid;
+  border-width: 0 20px;
+  cursor: pointer;
+  display: inline-flex;
+  height: 48px;
+  justify-content: center;
+  min-width: 232px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.links-nav {
+  border: 2px solid var(--main-color);
+  padding: 5px 40px;
+  background-color: rgba(0,0,0, 0.4);
+  font-family: "Chakra Petch", sans-serif;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.dropdown-item:hover {
+  color: none;
+  background-color: none;
+}

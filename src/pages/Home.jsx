@@ -4,26 +4,7 @@ import playstationURL from '../assets/playstation.svg';
 import xboxURL from '../assets/xbox.svg';
 import ButtonUI from '../components/ButtonUI';
 import NewsletterUI from '../components/NewsletterUI';
-import gameURL from '../assets/game-img.jpg';
-
-const ratingGames = [
-  {
-    id: 1,
-    name: 'Game 1',
-  },
-  {
-    id: 2,
-    name: 'Game 2',
-  },
-  {
-    id: 3,
-    name: 'Game 3',
-  },
-  {
-    id: 4,
-    name: 'Game 4',
-  },
-];
+import LazyGames from '../components/LazyGames';
 
 function Home() {
   return (
@@ -39,7 +20,7 @@ function Home() {
                 L&apos;unica esperienza in cui potrai trovare tutti i
                 videogiochi moderni <br /> e chattare live con altri gamers
               </p>
-              <Link to="/altrapagina">
+              <Link to="/storage">
                 <ButtonUI>Archivio Giochi</ButtonUI>
               </Link>
               <div className="mt-5">
@@ -87,25 +68,8 @@ function Home() {
               </p>
             </div>
           </div>
-          <div id="lazy-rating-games" className="row">
-            {ratingGames.map((game) => (
-              <div className="col-12 col-md-3 mb-3" key={game.id}>
-                <div className={`card rounded-0 mx-auto ${style.cardGame}`}>
-                  <img
-                    className={style.cardGameImage}
-                    src={gameURL}
-                    alt="game"
-                  />
-                  <h5 className={`font-main ${style.cardGameName}`}>
-                    {game.name}
-                  </h5>
-                </div>
-              </div>
-            ))}
-            <div className="col-12 text-center">
-              <ButtonUI>Scopri piu giochi</ButtonUI>
-            </div>
-          </div>
+          {/* row che contiene i rated giochi caricati */}
+          <LazyGames />
         </div>
       </div>
       <NewsletterUI />

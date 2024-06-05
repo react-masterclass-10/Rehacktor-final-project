@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const navTopStyle = {
   background: 'linear-gradient(rgba(0,0,0,0.9), transparent)',
@@ -65,13 +66,13 @@ function NavbarUI() {
         <div className="collapse navbar-collapse" id="navbarsExample07">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0" style={linksNav}>
             <li className="nav-item mx-3">
-              <a
+              <Link
                 className="nav-link text-white active"
                 aria-current="page"
-                href="/"
+                to="/storage"
               >
                 Tutti i giochi
-              </a>
+              </Link>
             </li>
             <li className="nav-item mx-3">
               <a className="nav-link text-white" href="/">

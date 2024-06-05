@@ -31,5 +31,6 @@ module.exports = {
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
     'jsx-a11y/control-has-associated-label': 0,
+    'no-console': 0,
   },
 };

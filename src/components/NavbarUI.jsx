@@ -1,7 +1,49 @@
+import { useEffect, useState } from 'react';
+
+const navTopStyle = {
+  background: 'linear-gradient(rgba(0,0,0,0.9), transparent)',
+  transition: '0.2s',
+  padding: '2rem 1rem',
+};
+
+const navScrollingStyle = {
+  backgroundColor: '#FEF836',
+  borderBottom: '4px solid #00F0FF',
+  transition: '0.2s',
+};
+
+const linksNav = {
+  border: '2px solid var(--main-color)',
+  padding: '5px 30px',
+  backgroundColor: 'rgba(0,0,0, 0.4)',
+  fontFamily: '"Chakra Petch", sans-serif',
+  textTransform: 'uppercase',
+  fontSize: '18px',
+};
+
 function NavbarUI() {
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <nav
-      className="navbar navbar-expand-lg bg-transparent p-3 fixed-top"
+      className="navbar navbar-expand-lg fixed-top"
+      style={scrolling ? navScrollingStyle : navTopStyle}
       aria-label="Eighth navbar example"
     >
       <div className="container">
@@ -21,7 +63,7 @@ function NavbarUI() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarsExample07">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 links-nav">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0" style={linksNav}>
             <li className="nav-item mx-3">
               <a
                 className="nav-link text-white active"
@@ -46,13 +88,13 @@ function NavbarUI() {
                 Accedi
               </a>
               <ul className="dropdown-menu rounded-0 links-nav">
-                <li className="my-2">
-                  <a className="dropdown-item text-white" href="/">
+                <li className="my-3">
+                  <a className="text-decoration-none text-white" href="/">
                     Registrati
                   </a>
                 </li>
-                <li className="my-2">
-                  <a className="dropdown-item text-white" href="/">
+                <li className="my-3">
+                  <a className="text-decoration-none text-white" href="/">
                     Login
                   </a>
                 </li>

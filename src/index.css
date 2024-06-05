@@ -20,6 +20,7 @@ h1, h2 {
 .cp-btn--black {
   border-image: url('./assets/cut-btn.svg') 0 20 fill;
   color: black;
+  font-size: 18px;
 }
 
 .cp-btn {
@@ -30,7 +31,7 @@ h1, h2 {
   border-width: 0 20px;
   cursor: pointer;
   display: inline-flex;
-  height: 48px;
+  height: 55px;
   justify-content: center;
   min-width: 232px;
   text-align: center;
@@ -50,7 +51,37 @@ h1, h2 {
   font-size: 18px;
 }
 
-.dropdown-item:hover {
-  color: none;
-  background-color: none;
+.footer {
+  background: #000;
+  padding-bottom: 28px;
+  position: relative;
 }
+
+.footer a {
+  color: var(--acc-color);
+  font-weight: bold;
+  font-family: "Chakra Petch", sans-serif;
+}
+
+.footer .icons {
+  font-size: 30px;
+}
+
+.footer::before {
+  background: url('../src/assets/razor-black.png');
+  content: "";
+  height: 39px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: -39px;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+
+

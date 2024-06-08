@@ -1,6 +1,6 @@
-import alertURL from '../assets/alert.png';
+import alertURL from '../../assets/alert.png';
 import ButtonUI from './ButtonUI';
-import style from '../styles/Home.module.css';
+import style from '../../styles/Home.module.css';
 
 function NewsletterUI() {
   return (

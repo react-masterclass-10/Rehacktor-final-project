@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import style from '../styles/Home.module.css';
 import playstationURL from '../assets/playstation.svg';
 import xboxURL from '../assets/xbox.svg';
-import ButtonUI from '../components/ButtonUI';
-import NewsletterUI from '../components/NewsletterUI';
-import LazyGames from '../components/LazyGames';
+import ButtonUI from '../components/GeneralComponents/ButtonUI';
+import NewsletterUI from '../components/GeneralComponents/NewsletterUI';
+import LazyGames from '../components/HomeComponents/LazyGames';
 
 function Home() {
   return (

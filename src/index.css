@@ -5,6 +5,14 @@
   --acc-color: #00F0FF;
 }
 
+.main-color {
+  color: var(--main-color) !important;
+}
+
+.acc-color {
+  color: var(--acc-color) !important;
+}
+
 h1, h2 {
   font-family: "Chakra Petch", sans-serif;
   color: black;

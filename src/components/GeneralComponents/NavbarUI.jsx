@@ -90,14 +90,17 @@ function NavbarUI() {
               </a>
               <ul className="dropdown-menu rounded-0 links-nav">
                 <li className="my-3">
-                  <a className="text-decoration-none text-white" href="/">
+                  <Link
+                    to="/register"
+                    className="text-decoration-none text-white"
+                  >
                     Registrati
-                  </a>
+                  </Link>
                 </li>
                 <li className="my-3">
-                  <a className="text-decoration-none text-white" href="/">
+                  <Link to="/login" className="text-decoration-none text-white">
                     Login
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>

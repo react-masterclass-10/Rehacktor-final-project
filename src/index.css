@@ -5,6 +5,10 @@
   --acc-color: #00F0FF;
 }
 
+body {
+  background-color: var(--main-color);
+}
+
 .main-color {
   color: var(--main-color) !important;
 }

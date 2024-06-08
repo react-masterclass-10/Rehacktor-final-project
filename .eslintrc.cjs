@@ -32,5 +32,6 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'jsx-a11y/control-has-associated-label': 0,
     'no-console': 0,
+    'jsx-a11y/label-has-associated-control': 0,
   },
 };

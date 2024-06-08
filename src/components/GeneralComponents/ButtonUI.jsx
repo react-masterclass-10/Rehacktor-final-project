@@ -1,6 +1,6 @@
 function ButtonUI({ children }) {
   return (
-    <button type="button" className="mt-4 cp-btn cp-btn--black">
+    <button type="submit" className="mt-4 cp-btn cp-btn--black">
       {children}
     </button>
   );

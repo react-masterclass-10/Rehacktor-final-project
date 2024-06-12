@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import style from '../styles/Home.module.css';
 import playstationURL from '../assets/playstation.svg';
 import xboxURL from '../assets/xbox.svg';
@@ -8,21 +9,40 @@ import LazyGames from '../components/HomeComponents/LazyGames';
 
 function Home() {
   return (
+    // <motion.div
+    //   initial="hidden"
+    //   animate="visible"
+    //   exit={{ opacity: 0, transition: { duration: 0.5 } }}
+    //   variants={{ visible: { transition: { staggerChildren: 0.3 } } }}
+    // >
     <>
       <header className={style.masthead}>
         <div className="container h-100">
           <div className="row h-100 align-items-center">
             <div className="col-10 col-md-8">
-              <h1 className="display-1 fw-bold">
+              <motion.h1
+                variants={{
+                  hidden: { opacity: 0, y: -20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                }}
+                className="display-1 fw-bold"
+              >
                 Ottinieni le ultime ReHacktor 2077 novità
-              </h1>
+              </motion.h1>
               <p className="lead">
                 L&apos;unica esperienza in cui potrai trovare tutti i
                 videogiochi moderni <br /> e chattare live con altri gamers
               </p>
-              <Link to="/storage">
-                <ButtonUI>Archivio Giochi</ButtonUI>
-              </Link>
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                }}
+              >
+                <Link to="/storage">
+                  <ButtonUI>Archivio Giochi</ButtonUI>
+                </Link>
+              </motion.div>
               <div className="mt-5">
                 <img src={playstationURL} className="mx-5" alt="play logo" />
                 <img src={xboxURL} alt="xbox logo" />
@@ -74,6 +94,7 @@ function Home() {
       </div>
       <NewsletterUI />
     </>
+    // </motion.div>
   );
 }
 

@@ -2,7 +2,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 function Genres() {
   const { genres } = useLoaderData();
-  console.log(genres);
+
   return (
     <div className="py-5">
       <p className="font-main lead fw-bold">Trova il tuo genere</p>
@@ -16,7 +16,6 @@ function Genres() {
             <button
               type="button"
               className="d-block w-100 text-start mb-2 btn btn-dark rounded-0 font-main"
-              key={genre.id}
             >
               {genre.name}
             </button>

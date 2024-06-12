@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import Loading from '../GeneralComponents/Loading';
 import GameCardUI from './GameCardUI';
 import AutocompleteSearch from './AutocompleteSearch';
@@ -31,7 +32,14 @@ function Games({ loading, error, games, setPage }) {
   return (
     <>
       <div className="col-12 col-md-9">
-        <h1>Nuovi e di tendenza</h1>
+        <motion.h1
+          variants={{
+            hidden: { opacity: 0, y: -20 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+          }}
+        >
+          Nuovi e di tendenza
+        </motion.h1>
         <p className="font-main">
           Giochi visualizzati in base al numero di giocatori e data di rilascio
           del gioco

@@ -9,6 +9,7 @@ import Storage, { getGenres } from '../pages/Storage';
 import Genre from '../pages/Genre';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
+import Game, { getGameDetails } from '../pages/Game';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,11 @@ const router = createBrowserRouter(
         }}
       />
       <Route path="/games/:genre/:id" element={<Genre />} />
+      <Route
+        path="/game/:gameslug/:id"
+        element={<Game />}
+        loader={getGameDetails}
+      />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
     </Route>

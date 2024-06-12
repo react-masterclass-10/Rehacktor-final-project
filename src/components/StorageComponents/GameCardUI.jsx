@@ -3,6 +3,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 
 const ButtonAction = styled(Button)(() => ({
   color: 'white',
@@ -13,7 +14,7 @@ const ButtonAction = styled(Button)(() => ({
 function GameCardUI({ game }) {
   return (
     <CardMedia
-      square
+      square="true"
       sx={{ maxWidth: 345, color: '#FFF', backgroundColor: '#000' }}
     >
       <CardMedia
@@ -29,9 +30,11 @@ function GameCardUI({ game }) {
         </p>
       </CardContent>
       <CardActions>
-        <ButtonAction variant="outlined" size="small">
-          Visita gioco
-        </ButtonAction>
+        <Link to={`/game/${game.slug}/${game.id}`}>
+          <ButtonAction variant="outlined" size="small">
+            Visita gioco
+          </ButtonAction>
+        </Link>
       </CardActions>
     </CardMedia>
   );

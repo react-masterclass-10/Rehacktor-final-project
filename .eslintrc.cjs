@@ -33,5 +33,7 @@ module.exports = {
     'jsx-a11y/control-has-associated-label': 0,
     'no-console': 0,
     'jsx-a11y/label-has-associated-control': 0,
+    'react/jsx-props-no-spreading': 0,
+    'no-shadow': 0,
   },
 };

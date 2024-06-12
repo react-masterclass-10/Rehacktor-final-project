@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+// import { motion } from 'framer-motion';
 import Games from '../components/StorageComponents/Games';
 import style from '../styles/Storage.module.css';
 import Genres from '../components/StorageComponents/Genres';

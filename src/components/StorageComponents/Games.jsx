@@ -50,7 +50,7 @@ function Games({ loading, error, games, setPage }) {
           {loading && <Loading />}
           {games &&
             games.map((game) => (
-              <div className="col-12 col-md-4 p-0" key={game.id}>
+              <div className="col-12 col-md-4 p-0" key={game.slug}>
                 <GameCardUI game={game} />
               </div>
             ))}

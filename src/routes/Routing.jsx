@@ -10,6 +10,9 @@ import Genre from '../pages/Genre';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Game, { getGameDetails } from '../pages/Game';
+import Profile from '../pages/Profile';
+import Settings from '../pages/Settings';
+import MiddlewareRoutes from '../components/GeneralComponents/Middleware';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +34,10 @@ const router = createBrowserRouter(
       />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route element={<MiddlewareRoutes />}>
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<Settings />} />
+      </Route>
     </Route>
   )
 );

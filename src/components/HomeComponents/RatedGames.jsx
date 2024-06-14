@@ -37,7 +37,7 @@ function RatedGames() {
       )}
       {ratedGames.slice(0, 4).map((game) => {
         return (
-          <div className="col-12 col-md-3 mb-3" key={game.id}>
+          <div className="col-12 col-md-3 mb-3" key={game.slug}>
             <div className={`card rounded-0 mx-auto ${style.cardGame}`}>
               {/* <LazyLoadImage
                 className={style.cardGameImage}

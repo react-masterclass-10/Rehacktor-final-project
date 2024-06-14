@@ -1,10 +1,15 @@
 import { RouterProvider } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import router from './routes/Routing';
 import AuthContext from './contexts/AuthContext';
 import useAuth from './hooks/useAuth';
 
 export function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AnimatePresence mode="wait">
+      <RouterProvider router={router} />
+    </AnimatePresence>
+  );
 }
 
 export function Root() {

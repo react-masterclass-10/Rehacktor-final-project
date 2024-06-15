@@ -9,10 +9,10 @@ function Login() {
   const navigate = useNavigate();
   const handleLogin = async (event) => {
     event.preventDefault();
-    const registerForm = event.currentTarget;
-    const { email, password } = Object.fromEntries(new FormData(registerForm));
+    const LoginForm = event.currentTarget;
+    const { email, password } = Object.fromEntries(new FormData(LoginForm));
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -20,7 +20,6 @@ function Login() {
         // eslint-disable-next-line no-alert
         alert(error.error_description || error.message);
       } else {
-        console.log(data);
         navigate('/');
       }
     } catch (error) {

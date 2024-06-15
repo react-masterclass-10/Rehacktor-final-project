@@ -27,7 +27,6 @@ const linksNav = {
 
 function NavbarUI() {
   const { sessione } = useContext(AuthContext);
-  console.log(sessione);
   const [scrolling, setScrolling] = useState(false);
 
   useEffect(() => {
@@ -123,12 +122,18 @@ function NavbarUI() {
               ) : (
                 <ul className="dropdown-menu rounded-0 links-nav">
                   <li className="my-3">
-                    <Link to="/" className="text-decoration-none text-white">
+                    <Link
+                      to="/settings"
+                      className="text-decoration-none text-white"
+                    >
                       settings
                     </Link>
                   </li>
                   <li className="my-3">
-                    <Link to="/" className="text-decoration-none text-white">
+                    <Link
+                      to="/profile"
+                      className="text-decoration-none text-white"
+                    >
                       Profile
                     </Link>
                   </li>

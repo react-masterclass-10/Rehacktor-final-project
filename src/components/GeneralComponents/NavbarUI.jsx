@@ -1,8 +1,21 @@
 import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import AuthContext from '../../contexts/AuthContext';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import PersonIcon from '@mui/icons-material/Person';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import supabase from '../../supabase/client';
+import AuthContext from '../../contexts/AuthContext';
+import getProfileImg from '../../utils/getProfileImg';
 
 const navTopStyle = {
   background: 'linear-gradient(rgba(0,0,0,0.9), transparent)',
@@ -26,8 +39,16 @@ const linksNav = {
 };
 
 function NavbarUI() {
-  const { sessione } = useContext(AuthContext);
+  const { sessione, profile } = useContext(AuthContext);
   const [scrolling, setScrolling] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,61 +113,228 @@ function NavbarUI() {
               </a>
             </li>
             <li className="nav-item mx-3 dropdown">
-              <a
-                className="nav-link dropdown-toggle text-white"
-                href="/"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                {!sessione ? 'Accedi' : 'Benvenuto'}
-              </a>
               {!sessione ? (
-                <ul className="dropdown-menu rounded-0 links-nav">
-                  <li className="my-3">
-                    <Link
-                      to="/register"
-                      className="text-decoration-none text-white"
-                    >
-                      Registrati
-                    </Link>
-                  </li>
-                  <li className="my-3">
-                    <Link
-                      to="/login"
-                      className="text-decoration-none text-white"
-                    >
-                      Login
-                    </Link>
-                  </li>
-                </ul>
+                <div>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      textAlign: 'center',
+                    }}
+                  >
+                    <Tooltip title="User login">
+                      <li className="nav-item mx-3">
+                        <a
+                          className="nav-link text-white"
+                          href="#"
+                          onClick={handleClick}
+                          aria-controls={open ? 'account-menu' : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={open ? 'true' : undefined}
+                        >
+                          Accedi
+                        </a>
+                      </li>
+                    </Tooltip>
+                  </Box>
+                  <Menu
+                    anchorEl={anchorEl}
+                    id="account-menu"
+                    open={open}
+                    onClose={handleClose}
+                    onClick={handleClose}
+                    PaperProps={{
+                      elevation: 0,
+                      sx: {
+                        overflow: 'visible',
+                        backgroundColor: 'black',
+                        color: 'white',
+                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                        mt: 1.5,
+                        '& .MuiAvatar-root': {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                        '&::before': {
+                          content: '""',
+                          display: 'block',
+                          position: 'absolute',
+                          top: 0,
+                          right: 14,
+                          width: 10,
+                          height: 10,
+                          bgcolor: 'background.paper',
+                          transform: 'translateY(-50%) rotate(45deg)',
+                          zIndex: 0,
+                        },
+                      },
+                    }}
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <ListItemIcon>
+                        <PersonIcon
+                          fontSize="small"
+                          sx={{
+                            color: 'white',
+                          }}
+                        />
+                      </ListItemIcon>
+                      <Link
+                        style={{
+                          color: 'white',
+                          textDecoration: 'none',
+                          fontFamily: '"Chakra Petch", sans-serif',
+                        }}
+                        to="/login"
+                      >
+                        Login
+                      </Link>
+                    </MenuItem>
+
+                    <MenuItem onClick={handleClose}>
+                      <ListItemIcon>
+                        <VpnKeyIcon
+                          fontSize="small"
+                          sx={{
+                            color: 'white',
+                          }}
+                        />
+                      </ListItemIcon>
+                      <Link
+                        style={{
+                          color: 'white',
+                          textDecoration: 'none',
+                          fontFamily: '"Chakra Petch", sans-serif',
+                        }}
+                        to="/register"
+                      >
+                        Registrati
+                      </Link>
+                    </MenuItem>
+                  </Menu>
+                </div>
               ) : (
-                <ul className="dropdown-menu rounded-0 links-nav">
-                  <li className="my-3">
-                    <Link
-                      to="/settings"
-                      className="text-decoration-none text-white"
-                    >
-                      settings
-                    </Link>
-                  </li>
-                  <li className="my-3">
-                    <Link
-                      to="/profile"
-                      className="text-decoration-none text-white"
-                    >
-                      Profile
-                    </Link>
-                  </li>
-                  <li className="my-3">
-                    <button
-                      type="button"
-                      className="btn font-main text-uppercase text-white"
-                      onClick={signOut}
-                    >
-                      esci
-                    </button>
-                  </li>
-                </ul>
+                <div>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      textAlign: 'center',
+                    }}
+                  >
+                    <Tooltip title="Account settings">
+                      <IconButton
+                        onClick={handleClick}
+                        size="small"
+                        sx={{ ml: 2 }}
+                        aria-controls={open ? 'account-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                      >
+                        <Avatar
+                          alt="user profile pic"
+                          src={profile && getProfileImg(profile.avatar_url)}
+                          sx={{ width: 32, height: 32 }}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                  <Menu
+                    anchorEl={anchorEl}
+                    id="account-menu"
+                    open={open}
+                    onClose={handleClose}
+                    onClick={handleClose}
+                    PaperProps={{
+                      elevation: 0,
+                      sx: {
+                        backgroundColor: 'black',
+                        color: 'white',
+                        overflow: 'visible',
+                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                        mt: 1.5,
+                        '& .MuiAvatar-root': {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                        '&::before': {
+                          content: '""',
+                          display: 'block',
+                          position: 'absolute',
+                          top: 0,
+                          right: 14,
+                          width: 10,
+                          height: 10,
+                          bgcolor: 'background.paper',
+                          transform: 'translateY(-50%) rotate(45deg)',
+                          zIndex: 0,
+                        },
+                      },
+                    }}
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <ListItemIcon>
+                        <PersonIcon
+                          fontSize="small"
+                          sx={{
+                            color: 'white',
+                          }}
+                        />
+                      </ListItemIcon>
+                      <Link
+                        style={{
+                          color: 'white',
+                          textDecoration: 'none',
+                          fontFamily: '"Chakra Petch", sans-serif',
+                        }}
+                        to="/profile"
+                      >
+                        Profilo
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      <ListItemIcon>
+                        <SettingsIcon
+                          fontSize="small"
+                          sx={{
+                            color: 'white',
+                          }}
+                        />
+                      </ListItemIcon>
+                      <Link
+                        style={{
+                          color: 'white',
+                          textDecoration: 'none',
+                          fontFamily: '"Chakra Petch", sans-serif',
+                        }}
+                        to="/settings"
+                      >
+                        Impostazioni
+                      </Link>
+                    </MenuItem>
+                    <Divider />
+
+                    <MenuItem onClick={signOut}>
+                      <ListItemIcon>
+                        <ExitToAppIcon
+                          fontSize="small"
+                          sx={{
+                            color: 'white',
+                          }}
+                        />
+                      </ListItemIcon>
+                      Esci
+                    </MenuItem>
+                  </Menu>
+                </div>
               )}
             </li>
           </ul>

@@ -25,17 +25,19 @@ function Game() {
           <div className="row py-5">
             <div className="col-12 col-md-6 my-5">
               <h2 className="display-3 fw-bold">{game.name}</h2>
-              <p className="fw-bold lead font-main text-secondary">
-                About this game
-              </p>
-              <p className="small">{game.description_raw}</p>
+              <button
+                type="button"
+                className="my-3 btn btn-outline-dark font-main rounded-0 px-3 py-3"
+              >
+                Aggiungi ai tuoi preferiti
+              </button>
               <p className="lead font-main fw-bold text-secondary">
                 Rating attuale
               </p>
               <div className="w-75">
                 <Stack direction="row">
                   <PieChart
-                    colors={['#02B2AF', '#B800D8', 'orange', 'blue']}
+                    colors={['#06EFFF', '#0066FF', '#737378', '#38A616']}
                     series={[
                       {
                         data,
@@ -72,6 +74,13 @@ function Game() {
                   />
                 </Stack>
               </div>
+              <p className="fw-bold lead font-main text-secondary">
+                About this game
+              </p>
+              <p className="small">{game.description_raw}</p>
+            </div>
+            <div className="col-12 col-md-6 my-5">
+              <img src={game.background_image} className="img-fluid" alt="" />
             </div>
           </div>
         </div>

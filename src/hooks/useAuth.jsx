@@ -3,14 +3,12 @@ import supabase from '../supabase/client';
 
 function useAuth() {
   const [sessione, setSessione] = useState(null);
-  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSessione(session);
-    });
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user);
     });
 
     const {
@@ -22,9 +20,40 @@ function useAuth() {
     return () => subscription.unsubscribe();
   }, []);
 
+  useEffect(() => {
+    let ignore = false;
+    async function getProfile() {
+      setLoading(true);
+      const { user } = sessione;
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .select(`*`)
+        .eq('id', user.id)
+        .single();
+
+      if (!ignore) {
+        if (error) {
+          console.warn(error);
+        } else if (data) {
+          setProfile(data);
+        }
+      }
+
+      setLoading(false);
+    }
+
+    getProfile();
+
+    return () => {
+      ignore = true;
+    };
+  }, [sessione]);
+
   return {
     sessione,
-    user,
+    loading,
+    profile,
   };
 }
 

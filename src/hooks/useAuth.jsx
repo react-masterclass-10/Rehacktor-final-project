@@ -8,12 +8,14 @@ function useAuth() {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session == null) return;
       setSessione(session);
     });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session == null) return;
       setSessione(session);
     });
 
@@ -24,6 +26,7 @@ function useAuth() {
     let ignore = false;
     async function getProfile() {
       setLoading(true);
+      if (sessione == null) return;
       const { user } = sessione;
 
       const { data, error } = await supabase

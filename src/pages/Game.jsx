@@ -2,16 +2,16 @@ import { useLoaderData } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Stack from '@mui/material/Stack';
 import { PieChart } from '@mui/x-charts/PieChart';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import style from '../styles/Game.module.css';
 import supabase from '../supabase/client';
 import AuthContext from '../contexts/AuthContext';
 import Chat from '../components/GameComponents/Chat';
 
 function Game() {
+  const [fav, setFav] = useState([]);
   const { profile } = useContext(AuthContext);
   const game = useLoaderData();
-  console.log(game);
 
   const data = game.ratings.map((rate) => {
     return {
@@ -45,6 +45,49 @@ function Game() {
     }
   };
 
+  const readFav = async () => {
+    const { data, error } = await supabase
+      .from('favourites')
+      .select('*')
+      .eq('game_id', game.id)
+      .eq('profile_id', profile.id);
+    if (error) {
+      // eslint-disable-next-line no-alert
+      alert(error.message);
+    } else {
+      setFav(() => [...data]);
+      console.log(fav);
+    }
+  };
+
+  const addToFavourites = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('favourites')
+        .insert([
+          {
+            profile_id: profile.id,
+            game_id: game.id,
+            game_name: game.name,
+          },
+        ])
+        .select();
+      if (error) {
+        // eslint-disable-next-line no-alert
+        alert(error.message);
+      } else {
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (profile) {
+      readFav();
+    }
+  }, []);
+
   return (
     <motion.div
       initial="hidden"
@@ -56,12 +99,26 @@ function Game() {
           <div className="row py-5">
             <div className="col-12 col-md-6 my-5">
               <h2 className="display-3 fw-bold">{game.name}</h2>
-              <button
-                type="button"
-                className="my-3 btn btn-outline-dark font-main rounded-0 px-3 py-3"
-              >
-                Aggiungi ai tuoi preferiti
-              </button>
+              {profile && (
+                <div>
+                  {fav.length !== 0 ? (
+                    <button
+                      type="button"
+                      className="my-3 btn btn-success font-main rounded-0 px-3 py-3 text-white fw-bold"
+                    >
+                      Gioco giá stato aggiunto 👍🏻
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="my-3 btn btn-outline-dark font-main rounded-0 px-3 py-3"
+                      onClick={addToFavourites}
+                    >
+                      Aggiungi ai tuoi preferiti
+                    </button>
+                  )}
+                </div>
+              )}
               <p className="lead font-main fw-bold text-secondary">
                 Rating attuale
               </p>

@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -39,6 +39,7 @@ const linksNav = {
 };
 
 function NavbarUI() {
+  const navigate = useNavigate();
   const { sessione, profile } = useContext(AuthContext);
   const [scrolling, setScrolling] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -66,8 +67,18 @@ function NavbarUI() {
     };
   }, []);
 
-  const signOut = async () => {
-    await supabase.auth.signOut();
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        // eslint-disable-next-line no-alert
+        alert(error);
+      } else {
+        navigate('/');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -322,7 +333,7 @@ function NavbarUI() {
                     </MenuItem>
                     <Divider />
 
-                    <MenuItem onClick={signOut}>
+                    <MenuItem onClick={handleSignOut}>
                       <ListItemIcon>
                         <ExitToAppIcon
                           fontSize="small"

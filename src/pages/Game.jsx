@@ -62,7 +62,7 @@ function Game() {
 
   const addToFavourites = async () => {
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('favourites')
         .insert([
           {
@@ -76,6 +76,7 @@ function Game() {
         // eslint-disable-next-line no-alert
         alert(error.message);
       } else {
+        readFav();
       }
     } catch (error) {
       console.log(error.message);

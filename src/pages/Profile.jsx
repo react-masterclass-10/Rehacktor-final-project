@@ -1,9 +1,16 @@
 import { useContext, useEffect } from 'react';
-import getProfileImg from '../utils/getProfileImg';
-import Loading from '../components/GeneralComponents/Loading';
-import supabase from '../supabase/client';
-import AuthContext from '../contexts/AuthContext';
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import useFavStore from '../store/useFavStore';
+import AuthContext from '../contexts/AuthContext';
+import supabase from '../supabase/client';
+import Loading from '../components/GeneralComponents/Loading';
+import getProfileImg from '../utils/getProfileImg';
 
 function Profile() {
   const { sessione, profile, loading } = useContext(AuthContext);
@@ -91,60 +98,41 @@ function Profile() {
             )}
           </div>
           <div className="col-12 col-md-6">
-            <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
-              <li className="nav-item" role="presentation">
-                <button
-                  className="nav-link active"
-                  id="pills-home-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-home"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-home"
-                  aria-selected="true"
-                >
-                  I tuoi preferiti
-                </button>
-              </li>
-              <li className="nav-item" role="presentation">
-                <button
-                  className="nav-link"
-                  id="pills-profile-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-profile"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-profile"
-                  aria-selected="false"
-                >
-                  I tuoi messaggi
-                </button>
-              </li>
-            </ul>
-            <div className="tab-content" id="pills-tabContent">
-              <div
-                className="tab-pane fade show active"
-                id="pills-home"
-                role="tabpanel"
-                aria-labelledby="pills-home-tab"
-                tabIndex="0"
+            <div>
+              <Accordion
+                sx={{
+                  fontFamily: '"Chakra Petch", sans-serif',
+                }}
               >
-                <ul>
-                  {fav.map((game) => (
-                    <li key={game.id}>
-                      <div>
-                        <p>{game.game_name}</p>
-                        <button
-                          type="button"
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel3-content"
+                  id="panel3-header"
+                >
+                  Lista Giochi preferiti
+                </AccordionSummary>
+                {fav.length !== 0 ? (
+                  fav.map((game) => (
+                    <AccordionDetails key={game.game_id}>
+                      {game.game_name}
+                      <AccordionActions>
+                        <Button
                           onClick={() => remove(game.game_id)}
+                          sx={{
+                            fontFamily: '"Chakra Petch", sans-serif',
+                          }}
                         >
-                          Rimuovi dai preferiti
-                        </button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                          Rimuovi dai preferiti <DeleteIcon />
+                        </Button>
+                      </AccordionActions>
+                    </AccordionDetails>
+                  ))
+                ) : (
+                  <AccordionDetails>
+                    Non ci sono giochi preferiti al momento...
+                  </AccordionDetails>
+                )}
+              </Accordion>
             </div>
           </div>
         </div>

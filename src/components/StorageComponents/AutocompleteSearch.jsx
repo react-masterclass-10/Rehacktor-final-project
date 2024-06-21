@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAutocomplete } from '@mui/base/useAutocomplete';
 import { styled } from '@mui/system';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -76,7 +77,7 @@ function AutocompleteSearch() {
         setLoading(false);
       }
       fetchSearchedGame();
-    }, 2000);
+    }, 1200);
     // clean up dell evento precedente...
     return () => {
       clearTimeout(timeoutAPI);
@@ -101,9 +102,7 @@ function AutocompleteSearch() {
         {loading && (
           <Listbox>
             <Box sx={{ display: 'flex', padding: '30px 30px' }}>
-              <CircularProgress color="inherit">
-                Caricando giochi
-              </CircularProgress>
+              <CircularProgress color="inherit" />
             </Box>
           </Listbox>
         )}
@@ -112,6 +111,9 @@ function AutocompleteSearch() {
             {groupedOptions.map((option, index) => (
               <li
                 className="p-3 font-main d-flex align-items-center"
+                style={{
+                  cursor: 'pointer',
+                }}
                 key={option.id}
                 {...getOptionProps({ option, index })}
               >
@@ -120,7 +122,12 @@ function AutocompleteSearch() {
                   src={`${option.background_image}`}
                   sx={{ marginRight: '10px' }}
                 />
-                {option.name}
+                <Link
+                  className="text-decoration-none text-reset"
+                  to={`/game/${option.slug}/${option.id}`}
+                >
+                  {option.name}
+                </Link>
               </li>
             ))}
           </Listbox>

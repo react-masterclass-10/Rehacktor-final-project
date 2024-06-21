@@ -5,6 +5,7 @@
   background-color: #d3d3d32a;
   overflow-y: scroll;
   overflow-x: hidden;
+  scroll-behavior: smooth !important;
 }
 
 .message {

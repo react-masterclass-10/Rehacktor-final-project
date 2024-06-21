@@ -24,7 +24,6 @@ function useAuth() {
     let ignore = false;
     async function getProfile() {
       setLoading(true);
-      if (sessione == null) return;
       const { user } = sessione;
 
       const { data, error } = await supabase

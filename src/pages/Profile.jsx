@@ -6,6 +6,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Divider from '@mui/material/Divider';
 import useFavStore from '../store/useFavStore';
 import AuthContext from '../contexts/AuthContext';
 import supabase from '../supabase/client';
@@ -125,6 +126,7 @@ function Profile() {
                           Rimuovi dai preferiti <DeleteIcon />
                         </Button>
                       </AccordionActions>
+                      <Divider />
                     </AccordionDetails>
                   ))
                 ) : (

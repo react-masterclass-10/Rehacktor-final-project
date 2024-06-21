@@ -10,6 +10,7 @@ import Chat from '../components/GameComponents/Chat';
 
 function Game() {
   const [fav, setFav] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { profile } = useContext(AuthContext);
   const game = useLoaderData();
 
@@ -61,6 +62,7 @@ function Game() {
   };
 
   const addToFavourites = async () => {
+    setLoading(true);
     try {
       const { error } = await supabase
         .from('favourites')
@@ -81,6 +83,7 @@ function Game() {
     } catch (error) {
       console.log(error.message);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -102,21 +105,32 @@ function Game() {
               <h2 className="display-3 fw-bold">{game.name}</h2>
               {profile && (
                 <div>
-                  {fav.length !== 0 ? (
-                    <button
-                      type="button"
-                      className="my-3 btn btn-success font-main rounded-0 px-3 py-3 text-white fw-bold"
-                    >
-                      Gioco giá stato aggiunto 👍🏻
-                    </button>
-                  ) : (
+                  {loading ? (
                     <button
                       type="button"
                       className="my-3 btn btn-outline-dark font-main rounded-0 px-3 py-3"
-                      onClick={addToFavourites}
                     >
-                      Aggiungi ai tuoi preferiti
+                      sto aggiungenfo...
                     </button>
+                  ) : (
+                    <div>
+                      {fav.length !== 0 ? (
+                        <button
+                          type="button"
+                          className="my-3 btn btn-success font-main rounded-0 px-3 py-3 text-white fw-bold"
+                        >
+                          Gioco giá stato aggiunto 👍🏻
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          className="my-3 btn btn-outline-dark font-main rounded-0 px-3 py-3"
+                          onClick={addToFavourites}
+                        >
+                          Aggiungi ai tuoi preferiti
+                        </button>
+                      )}
+                    </div>
                   )}
                 </div>
               )}
@@ -177,9 +191,8 @@ function Game() {
               />
               {profile && (
                 <div>
-                  <div className={style.chatBox}>
-                    <Chat game={game} />
-                  </div>
+                  <Chat game={game} />
+
                   <form onSubmit={handleChat} className="mt-3">
                     <div className="input-group mb-3">
                       <input

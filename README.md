@@ -1,41 +1,44 @@
-# TODO LIST 
+## Descrizione
+Real time web app contenente un archivio di videogiochi di diverse generazioni, filtrabili per genere e piattaforma in cui sarà possibile registrarsi e inviare messaggi in tempo reale ad altri utenti connessi. 
 
-* [x] Implementare validation form lato client su Registrati.
-  * [x] Esempio con Reack-hook-form. 
-* [x] Implementare la update profile lato client.
-  * [ ] servire l'avatar nel profile
-* [x] Creare tabelle supabase. 
-  * [x] Favourites. 
-    * id - type uuid - value gen random id()
-    * created_at - timestamps - now()
-    * profile_id - type uuid - auth.uid()
-    * game_id - text - null 
-    * game_name - text - null  
+## API
+* [rawg.io - client REST API](https://rawg.io/)
+* [supabase - backend API/BaaS](https://supabase.com/)
 
-    Foreign keys
-    favorites_profile_id_fkey
-    profile_id -> public.profiles.id
+## Soluzione di Styling o Libreria di Componenti
+* [Bootstrap](https://getbootstrap.com/)
+* [Material UI](https://mui.com/core/)
+* [Css Modules](https://github.com/css-modules/css-modules)
 
-    polices 
-    Enable read access for all users SELECT
-    Enable users to delete favorites games DELETE 
-    Users can insert their own favorites games INSERT 
-  * [x] Chat Messages.
-  * A table to store messages 
-    content - text - null
-    profile_id - uuid - auth.id()
-    game_id - text - null
+## Pagine
+* General pages
+  * Home Page - Pagina di atterraggio con informazioni generali
+  * Storage Page - Pagina archivio giochi e filtri
+  * Game Page - Pagina di dettaglio del singolo gioco
+  * Genre Page - Pagina di archivio giochi di un singolo genere
+  * Login Page - Pagina di login utente
+  * Register Page - Pagina di registrazione utente
+* Authorized pages
+  * Profile Page - Pagina profilo utente
+  * Settings Page - Pagina di aggioramento profilo utente
 
-    favorites_profile_id_fkey
-    profile_id -> public.profiles.id
+## API + Interazione Utente
+* Utente non autenticato 
+  * Visita archivio videogiochi 
+  * Filtro videogiochi
+  * Visita dettaglio singolo videogiocho
+  * Registrazione con email valida in piattaforma
+* Utente autenticato 
+  * Login con email valida in piattaforma  
+  * Creazione di lista videogiochi preferiti 
+  * Realtime chat con altri utenti autenticati connessi
 
-    polices 
-    Enable read access for all users SELECT
-    Users can insert their own messages INSERT
+## Context API
+* Token di Sessione per utente autenticato
+* Dettaglio profilo utente autenticato
 
-  * [x] Abilitare Real Time socket su supabase
-    * [x] database/publications enable messages table   
-* [ ] Implementare la chat real time
-  * [ ] Subscribe on realtime changes in your database on().subscribe()
-* [ ] Implementare aggiunta e visualizzazione giochi favoriti.
-* Fine.
+## Zustand global state management 
+* Lista favoriti 
+
+## Distribuzione
+* [Visita Rehacktor]()

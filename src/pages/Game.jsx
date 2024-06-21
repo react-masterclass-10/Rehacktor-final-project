@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import Stack from '@mui/material/Stack';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { useContext, useEffect, useState } from 'react';
-import style from '../styles/Game.module.css';
 import supabase from '../supabase/client';
 import AuthContext from '../contexts/AuthContext';
 import Chat from '../components/GameComponents/Chat';
